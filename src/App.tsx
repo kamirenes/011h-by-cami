@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import "./App.css";
 import { Suspense } from "react";
 import PublicRoute from "./components/PublicRoute/PublicRoute";
@@ -12,16 +12,26 @@ function App() {
   return (
     <Router>
       <Routes>
-        <PublicRoute authenticated={authenticated} path={ROUTES.login}>
-          <Suspense fallback="loading">
-            <Login />
-          </Suspense>
-        </PublicRoute>
-        <PrivateRoute path="/" authenticated={authenticated}>
-          <Suspense fallback="loading">
-            <PrincipalLayout />
-          </Suspense>
-        </PrivateRoute>
+        <Route
+          path="/login"
+          element={
+            <PublicRoute authenticated={authenticated} path={ROUTES.login}>
+              <Suspense fallback="loading">
+                <Login />
+              </Suspense>
+            </PublicRoute>
+          }
+        />
+        <Route
+          path="/"
+          element={
+            <PrivateRoute path="/" authenticated={authenticated}>
+              <Suspense fallback="loading">
+                <PrincipalLayout />
+              </Suspense>
+            </PrivateRoute>
+          }
+        />
       </Routes>
     </Router>
   );
