@@ -28,11 +28,6 @@ export type TProductFilters = {
   material: ProductMaterial[],
   type: ProductType[],
   category: ProductCategory[],
-  options: {
-    outOfStock: boolean,
-    waterproof: boolean,
-    original: boolean,
-  }
 }
 
 export enum ProductFilterEnum {

@@ -7,7 +7,10 @@ import {
   ProductSize,
   ProductType,
 } from "../../constants/products";
-import { FilterIndex, ProductFilterEnum, TProduct, TProductFilters } from "./types";
+import {
+  TProduct,
+  TProductFilters,
+} from "./types";
 
 export default () => {
   const [pageHeight, setPageHeight] = useState(window.innerHeight);
@@ -18,13 +21,9 @@ export default () => {
     material: [],
     type: [],
     category: [],
-    options: {
-      outOfStock: false,
-      waterproof: false,
-      original: false,
-    },
   };
   const [filters, setFilters] = useState<TProductFilters>(defaultFilters);
+  const [sortOrderAsc, setSortOrderAsc] = useState(true);
 
   useEffect(() => {
     const handleResize = () => {
@@ -75,30 +74,42 @@ export default () => {
   };
 
   const productListFiltered = useMemo(() => {
-    return (productList as TProduct[]).filter((product) => {
-      const {
-        size,
-        color,
-        material,
-        type,
-        category,
-        options: filterOptions,
-      } = filters;
-  
+    const filtered = (productList as TProduct[]).filter((product) => {
+      const { size, color, material, type, category } = filters;
+
       if (size.length > 0 && !size.includes(product.size)) return false;
       if (color.length > 0 && !color.includes(product.color)) return false;
-      if (material.length > 0 && !material.includes(product.material)) return false;
+      if (material.length > 0 && !material.includes(product.material))
+        return false;
       if (type.length > 0 && !type.includes(product.type)) return false;
-      if (category.length > 0 && !category.includes(product.category)) return false;
-  
-      if (filterOptions.outOfStock && !product.options.outOfStock) return false;
-      if (filterOptions.waterproof && !product.options.waterproof) return false;
-      if (filterOptions.original && !product.options.original) return false;
-  
+      if (category.length > 0 && !category.includes(product.category))
+        return false;
+
       return true;
     });
-  }, [filters]);
-  
+    const sizeOrder: Record<ProductSize, number> = {
+      XS: 0,
+      S: 1,
+      M: 2,
+      L: 3,
+      XL: 4,
+    };
+
+    const sorted = [...filtered].sort((a, b) => {
+      const order = sizeOrder[a.size] - sizeOrder[b.size];
+      return sortOrderAsc ? order : -order;
+    });
+    return sorted;
+  }, [filters, sortOrderAsc]);
+
+  const onOrderChange = (value: boolean) => {
+    setSortOrderAsc(value)
+  }
+
+  const orderOptions = [
+    {label: "ASC", value: true},
+    {label: "DESC", value: false}
+  ]
 
   return {
     categoryOptions,
@@ -109,6 +120,8 @@ export default () => {
     productListFiltered,
     sizeOptions,
     typeOptions,
+    orderOptions,
     onFilterChange,
+    onOrderChange,
   };
 };
