@@ -1,23 +1,29 @@
-import './App.css';
-import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import "./App.css";
+import { Suspense } from "react";
+import PublicRoute from "./components/PublicRoute/PublicRoute";
+import { ROUTES } from "./constants/routes";
+import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
+import Login from "./features/auth/Login/Login";
+import PrincipalLayout from "./features/layout/Layout";
 
 function App() {
+  const authenticated = true; // TODO: change for the correct logic when the auth flow be ready
   return (
-    <div className="App">
-      <header className="App-header">
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <Routes>
+        <PublicRoute authenticated={authenticated} path={ROUTES.login}>
+          <Suspense fallback="loading">
+            <Login />
+          </Suspense>
+        </PublicRoute>
+        <PrivateRoute path="/" authenticated={authenticated}>
+          <Suspense fallback="loading">
+            <PrincipalLayout />
+          </Suspense>
+        </PrivateRoute>
+      </Routes>
+    </Router>
   );
 }
 
