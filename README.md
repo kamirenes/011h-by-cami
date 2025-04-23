@@ -46,3 +46,18 @@ Start the storybook server
 ```bash
   npm run storybook
 ```
+
+## Test
+
+For unit test run
+
+```bash
+  npm run test
+```
+
+For e2e test run
+
+```bash
+  npm run cypress
+```
+

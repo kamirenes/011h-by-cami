@@ -9,7 +9,7 @@ import PrincipalLayout from "./features/layout/Layout";
 import ProductsMainScreen from "./features/products/ProductsMainScreen/ProductsMainScreen";
 
 function App() {
-  const authenticated = true; // TODO: change for the correct logic when the auth flow be ready
+  const authenticated = process.env.REACT_APP_E2E === 'true' || false; // TODO: change for the correct logic when the auth flow be ready
   return (
     <Router>
       <Routes>
