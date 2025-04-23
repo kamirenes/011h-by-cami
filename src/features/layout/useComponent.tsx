@@ -9,8 +9,8 @@ const useComponent = () => {
 
   const getInitialPage = (pathname: string) => {
     if (pathname.startsWith('/products')) return 'products';
-    if (pathname.startsWith('/dashboard')) return 'dashboard';
-    return 'dashboard';
+    if (pathname.startsWith('/home')) return 'home';
+    return 'home';
   };
 
   const [pageHeight, setPageHeight] = useState(window.innerHeight);
@@ -29,8 +29,8 @@ const useComponent = () => {
 
   const menuItems = [
     {
-      key: 'dashboard',
-      label: 'Dashboard',
+      key: 'home',
+      label: 'Home',
       onClick: () => navigate('/'),
     },
     {
@@ -39,9 +39,9 @@ const useComponent = () => {
       onClick: () => navigate('/products'),
     },
     {
-      key: 'logout',
-      label: 'Log-out',
-      onClick: () => console.log('Log-out'),
+      key: 'your-cart',
+      label: 'Your cart',
+      onClick: () => navigate('/'),
     },
   ];
 

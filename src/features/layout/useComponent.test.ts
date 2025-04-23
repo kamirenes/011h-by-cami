@@ -31,7 +31,7 @@ describe('useComponent', () => {
   });
 
   it('should set currentPage on menu click', () => {
-    (useLocation as jest.Mock).mockReturnValue({ pathname: '/dashboard' });
+    (useLocation as jest.Mock).mockReturnValue({ pathname: '/home' });
     (useNavigate as jest.Mock).mockReturnValue(mockedNavigate);
 
     const { result } = renderHook(() => useComponent());
