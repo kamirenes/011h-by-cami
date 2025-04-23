@@ -6,6 +6,7 @@ import { ROUTES } from "./constants/routes";
 import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
 import Login from "./features/auth/Login/Login";
 import PrincipalLayout from "./features/layout/Layout";
+import ProductsMainScreen from "./features/products/ProductsMainScreen/ProductsMainScreen";
 
 function App() {
   const authenticated = true; // TODO: change for the correct logic when the auth flow be ready
@@ -31,7 +32,9 @@ function App() {
               </Suspense>
             </PrivateRoute>
           }
-        />
+        >
+          <Route path="products" element={<ProductsMainScreen />} />
+        </Route>
       </Routes>
     </Router>
   );

@@ -23,3 +23,26 @@ Design is open. Choose whatever fits you best for the styles and feel free to ch
 - [OPTIONAL] You should implement sorting by size:
   - It should sort items by size asc
   - It should sort items by size desc
+
+
+## Installation and run the project
+
+Install dependencies
+
+```bash
+  npm i
+```
+
+Run the project in local
+
+```bash
+  npm run start
+```
+
+## Storybook
+
+Start the storybook server
+
+```bash
+  npm run storybook
+```

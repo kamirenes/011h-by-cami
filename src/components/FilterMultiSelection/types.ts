@@ -10,4 +10,6 @@ export type FilterMultiSelectionProps = {
     option?: DefaultOptionType | DefaultOptionType[] | undefined
   ) => void;
   style?: CSSProperties;
+  title: string;
+  titleSize?: number;
 };
