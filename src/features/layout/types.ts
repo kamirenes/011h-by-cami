@@ -2,7 +2,6 @@ import {
   ProductCategory,
   ProductColors,
   ProductMaterial,
-  ProductOption,
   ProductSize,
   ProductType,
 } from "../../constants/products";
