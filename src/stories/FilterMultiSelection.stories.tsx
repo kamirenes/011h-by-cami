@@ -7,28 +7,33 @@ const meta: Meta<typeof FilterMultipleSelection> = {
   component: FilterMultipleSelection,
   tags: ['autodocs'],
   args: {
-    placeHolder: 'Selecciona una o varias opciones',
+    title: 'Sizes',
+    titleSize: 14,
+    placeHolder: 'Select sizes',
+    defaultValue: [],
     options: Object.values(ProductSize).map((size) => ({
       label: size,
       value: size,
     })),
-    defaultValue: [],
     style: { width: 300 },
+    onChange: (value: string[]) => console.log('Selected:', value),
   },
 };
 
 export default meta;
 type Story = StoryObj<typeof FilterMultipleSelection>;
 
-export const Default: Story = {
+export const Default: Story = {};
+
+export const WithPreselectedValues: Story = {
   args: {
-    onChange: (value: string[]) => console.log('Selected:', value),
+    defaultValue: [ProductSize.M, ProductSize.L],
   },
 };
 
-export const PreSelected: Story = {
+export const CustomTitleSize: Story = {
   args: {
-    defaultValue: [ProductSize.M, ProductSize.L],
-    onChange: (value: string[]) => console.log('Selected:', value),
+    title: 'Custom Size Title',
+    titleSize: 18,
   },
 };
